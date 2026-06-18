@@ -46,35 +46,35 @@ Mọi trao đổi ngoài hệ thống (Zalo, gọi điện, nhắn tin)
 flowchart LR
     Customer["Khách hàng"] --> PublicSite["Website / Booking Form"]
 
-    PublicSite --> RequestInbox["Request Inbox\nDanh sách yêu cầu mới"]
+    PublicSite --> RequestInbox["Request Inbox<br/>Danh sách yêu cầu mới"]
 
-    RequestInbox --> Review["Artist/Admin review\nXem ý tưởng, hình ảnh, flag cover-up"]
+    RequestInbox --> Review["Artist/Admin review<br/>Xem ý tưởng, hình ảnh, flag cover-up"]
 
     Review --> Decision{"Action"}
 
-    Decision -->|"DEFAULT ~90%"| ConsultationProposal["📅 Đặt lịch tư vấn"]
-    Decision -->|"Không cần gặp ~10%"| Estimate["⚡ Gửi thẳng estimate"]
-    Decision -->|"Không phù hợp"| Closed["❌ Pass / Reject"]
+    Decision -->|DEFAULT ~90%| ConsultationProposal["📅 Đặt lịch tư vấn"]
+    Decision -->|Không cần gặp ~10%| Estimate["⚡ Gửi thẳng estimate"]
+    Decision -->|Không phù hợp| Closed["❌ Pass / Reject"]
 
-    ConsultationProposal --> CustomerConsultConfirm["Khách xác nhận lịch tư vấn\n1-click, không cần login"]
-    CustomerConsultConfirm --> ConsultationAppt["Consultation Appointment\nHiện trên calendar"]
+    ConsultationProposal --> CustomerConsultConfirm["Khách xác nhận lịch tư vấn<br/>1-click, không cần login"]
+    CustomerConsultConfirm --> ConsultationAppt["Consultation Appointment<br/>Hiện trên calendar"]
 
-    ConsultationAppt --> PreConsult["Trao đổi trước buổi gặp\nZalo/phone → Artist ghi chú vào thread"]
+    ConsultationAppt --> PreConsult["Trao đổi trước buổi gặp<br/>Zalo/phone → Artist ghi chú vào thread"]
     PreConsult --> ConsultDone["Buổi tư vấn diễn ra"]
 
     ConsultDone --> ConsultOutcome{"Outcome"}
 
-    ConsultOutcome -->|"Tattoo ngay"| TattooNow["🎨 Tattoo Now\nTạo Tattoo Appointment ngay sau"]
-    ConsultOutcome -->|"Lịch xăm sau"| ScheduleTattoo["📅 Đặt lịch xăm sau"]
-    ConsultOutcome -->|"Chưa chốt"| FollowUp["⏰ Follow-up Later"]
-    ConsultOutcome -->|"Không phù hợp"| ClosedEnd["❌ Close"]
+    ConsultOutcome -->|Tattoo ngay| TattooNow["🎨 Tattoo Now<br/>Tạo Tattoo Appointment ngay sau"]
+    ConsultOutcome -->|Lịch xăm sau| ScheduleTattoo["📅 Đặt lịch xăm sau"]
+    ConsultOutcome -->|Chưa chốt| FollowUp["⏰ Follow-up Later"]
+    ConsultOutcome -->|Không phù hợp| ClosedEnd["❌ Close"]
 
     Estimate --> CustomerConfirm["Khách xác nhận estimate"]
     ScheduleTattoo --> CustomerConfirm
 
     CustomerConfirm --> DepositCheck{"Cần deposit?"}
-    DepositCheck -->|"Không"| TattooAppointment["Tattoo Appointment Confirmed"]
-    DepositCheck -->|"Có"| Deposit["Khách thanh toán deposit"]
+    DepositCheck -->|Không| TattooAppointment["Tattoo Appointment Confirmed"]
+    DepositCheck -->|Có| Deposit["Khách thanh toán deposit"]
     Deposit --> TattooAppointment
     TattooNow --> TattooAppointment
 
@@ -153,27 +153,27 @@ Flag này tự động hiển thị nổi bật trong request card để artist 
 flowchart TD
     Start["Khách gửi form booking"] --> CoverCheck{"Cover-up / sửa xăm cũ?"}
 
-    CoverCheck -->|"Có / Chưa chắc"| CoverFlag["⚠️ Flag: Cover-up\nArtist cần xem ảnh vết xăm cũ"]
-    CoverCheck -->|"Không"| InputType{"Loại thông tin gửi lên"}
+    CoverCheck -->|Có / Chưa chắc| CoverFlag["⚠️ Flag: Cover-up<br/>Artist cần xem ảnh vết xăm cũ"]
+    CoverCheck -->|Không| InputType{"Loại thông tin gửi lên"}
 
     CoverFlag --> NeedConsult["Luôn cần consultation"]
 
-    InputType -->|"Chỉ tên + liên hệ"| Case1["Case 1: Lead"]
-    InputType -->|"Có idea + ảnh reference"| Case2["Case 2: Custom Request"]
-    InputType -->|"Chọn flash design"| Case3["Case 3: Flash Booking"]
+    InputType -->|Chỉ tên + liên hệ| Case1["Case 1: Lead"]
+    InputType -->|Có idea + ảnh reference| Case2["Case 2: Custom Request"]
+    InputType -->|Chọn flash design| Case3["Case 3: Flash Booking"]
 
     Case1 --> NeedConsult
     Case2 --> NeedConsult
     Case3 --> NeedConsult
 
-    NeedConsult --> PreConsultNote["Artist có thể ghi chú\nqua trao đổi trước buổi gặp"]
+    NeedConsult --> PreConsultNote["Artist có thể ghi chú<br/>qua trao đổi trước buổi gặp"]
     PreConsultNote --> ConsultAppt["Consultation Appointment"]
     ConsultAppt --> Outcome{"Outcome"}
 
-    Outcome -->|"Tattoo Now"| TattooNow["Tạo Tattoo Appointment ngay"]
-    Outcome -->|"Lịch sau"| TattooLater["Gửi estimate / đặt lịch xăm"]
-    Outcome -->|"Follow-up"| FollowUp["Follow-up Later"]
-    Outcome -->|"Không phù hợp"| Closed["Close Request"]
+    Outcome -->|Tattoo Now| TattooNow["Tạo Tattoo Appointment ngay"]
+    Outcome -->|Lịch sau| TattooLater["Gửi estimate / đặt lịch xăm"]
+    Outcome -->|Follow-up| FollowUp["Follow-up Later"]
+    Outcome -->|Không phù hợp| Closed["Close Request"]
 ```
 
 > **Lưu ý:** Case 3 (flash design) vẫn nên qua consultation ngắn (15–20 phút) để artist kiểm tra da và vị trí. Chỉ bỏ qua consultation nếu artist đã biết rõ khách (khách quen, đã xăm nhiều lần tại studio).
@@ -271,17 +271,17 @@ Consultation là appointment thật — chiếm thời gian artist/studio, cần
 
 ```mermaid
 flowchart TD
-    Request["Booking Request\n+ Cover-up flag nếu có"] --> PreConsult["Trao đổi trước nếu cần\nArtist ghi chú vào thread"]
-    PreConsult --> ProposeConsult["Artist đặt lịch tư vấn\n📅 DEFAULT action"]
-    ProposeConsult --> CustomerConfirm["Khách confirm\n1-click link, không cần login"]
+    Request["Booking Request<br/>+ Cover-up flag nếu có"] --> PreConsult["Trao đổi trước nếu cần<br/>Artist ghi chú vào thread"]
+    PreConsult --> ProposeConsult["Artist đặt lịch tư vấn<br/>📅 DEFAULT action"]
+    ProposeConsult --> CustomerConfirm["Khách confirm<br/>1-click link, không cần login"]
     CustomerConfirm --> ConsultAppt["Consultation Appointment trên calendar"]
-    ConsultAppt --> ConsultDone["Buổi tư vấn diễn ra\nArtist ghi consultation note"]
+    ConsultAppt --> ConsultDone["Buổi tư vấn diễn ra<br/>Artist ghi consultation note"]
     ConsultDone --> Outcome{"Outcome"}
 
-    Outcome -->|"Tattoo Now"| TattooNow["🎨 Tattoo Now\nNhập thời lượng → Tạo Tattoo Appointment ngay"]
-    Outcome -->|"Lịch xăm sau"| TattooLater["📅 Gửi estimate / đặt lịch xăm"]
-    Outcome -->|"Follow-up"| FollowUp["⏰ Follow-up Later"]
-    Outcome -->|"Không phù hợp"| Closed["❌ Close Request"]
+    Outcome -->|Tattoo Now| TattooNow["🎨 Tattoo Now<br/>Nhập thời lượng → Tạo Tattoo Appointment ngay"]
+    Outcome -->|Lịch xăm sau| TattooLater["📅 Gửi estimate / đặt lịch xăm"]
+    Outcome -->|Follow-up| FollowUp["⏰ Follow-up Later"]
+    Outcome -->|Không phù hợp| Closed["❌ Close Request"]
 
     TattooNow --> TattooAppt["Tattoo Appointment"]
     TattooLater --> CustomerApprove["Khách approve + deposit nếu cần"]
@@ -612,9 +612,9 @@ flowchart TB
     end
 
     subgraph Frontend["Frontend Apps"]
-        PublicWeb["Public Website\nBooking form (có cover-up flag)"]
-        AdminWeb["Admin Dashboard\nKanban board, today view, reports"]
-        ArtistPortal["Artist Workspace\nRequests, notes, personal calendar"]
+        PublicWeb["Public Website<br/>Booking form (có cover-up flag)"]
+        AdminWeb["Admin Dashboard<br/>Kanban board, today view, reports"]
+        ArtistPortal["Artist Workspace<br/>Requests, notes, personal calendar"]
     end
 
     subgraph Backend["Backend API"]
@@ -633,9 +633,9 @@ flowchart TB
 
     subgraph Data["Data & External Services"]
         DB[("PostgreSQL")]
-        Storage["Image Storage\nCloudinary / S3"]
-        Mail["Email Provider\nResend / SendGrid"]
-        ZaloZNS["Zalo ZNS\nReminder"]
+        Storage["Image Storage<br/>Cloudinary / S3"]
+        Mail["Email Provider<br/>Resend / SendGrid"]
+        ZaloZNS["Zalo ZNS<br/>Reminder"]
         PaymentGW["Payment Gateway"]
     end
 
@@ -682,7 +682,7 @@ flowchart TD
     Event --> E10["Hủy / đổi lịch"]
 
     E1 --> NotifyArtist["Notify artist/admin"]
-    E2 --> NotifyCustomerConsult["Gửi link confirm consultation\n1-click, không login"]
+    E2 --> NotifyCustomerConsult["Gửi link confirm consultation<br/>1-click, không login"]
     E3 --> NotifyArtistAdmin["Notify artist/admin confirmed"]
     E4 --> Reminder["Gửi reminder qua Zalo ZNS"]
     E5 --> FollowUpMsg["Gửi follow-up nếu cần"]
@@ -713,14 +713,14 @@ Calendar chỉ hiển thị những gì đã đủ rõ để lên lịch:
 ```mermaid
 flowchart TD
     Request["Booking Request"] --> IsScheduled{"Đã lên lịch chưa?"}
-    IsScheduled -->|"Chưa"| RequestInbox["Nằm trong Request Inbox"]
-    IsScheduled -->|"Consultation"| ConsultCalendar["Consultation Appointment\ntrên Calendar"]
-    IsScheduled -->|"Đã chốt xăm"| TattooCalendar["Tattoo Appointment\ntrên Calendar"]
+    IsScheduled -->|Chưa| RequestInbox["Nằm trong Request Inbox"]
+    IsScheduled -->|Consultation| ConsultCalendar["Consultation Appointment<br/>trên Calendar"]
+    IsScheduled -->|Đã chốt xăm| TattooCalendar["Tattoo Appointment<br/>trên Calendar"]
 
     ConsultCalendar --> ConsultOutcome{"Outcome"}
-    ConsultOutcome -->|"Tattoo Now"| NewTattoo["Tạo Tattoo Appointment ngay sau"]
-    ConsultOutcome -->|"Lịch xăm sau"| TattooCalendar
-    ConsultOutcome -->|"Follow-up"| RequestInbox
+    ConsultOutcome -->|Tattoo Now| NewTattoo["Tạo Tattoo Appointment ngay sau"]
+    ConsultOutcome -->|Lịch xăm sau| TattooCalendar
+    ConsultOutcome -->|Follow-up| RequestInbox
     NewTattoo --> TattooCalendar
 
     TattooCalendar --> DayView["Day View theo artist"]
