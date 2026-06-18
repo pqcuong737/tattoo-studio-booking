@@ -52,9 +52,9 @@ flowchart LR
 
     Review --> Decision{"Action"}
 
-    Decision -->|"DEFAULT ~90%"| ConsultationProposal["📅 Đặt lịch tư vấn"]
-    Decision -->|"Không cần gặp ~10%"| Estimate["⚡ Gửi thẳng estimate"]
-    Decision -->|"Không phù hợp"| Closed["❌ Pass / Reject"]
+    Decision -->|"DEFAULT ~90%"| ConsultationProposal["Đặt lịch tư vấn"]
+    Decision -->|"Không cần gặp ~10%"| Estimate["Gửi thẳng estimate"]
+    Decision -->|"Không phù hợp"| Closed["Pass / Reject"]
 
     ConsultationProposal --> CustomerConsultConfirm["Khách xác nhận lịch tư vấn<br/>1-click, không cần login"]
     CustomerConsultConfirm --> ConsultationAppt["Consultation Appointment<br/>Hiện trên calendar"]
@@ -64,10 +64,10 @@ flowchart LR
 
     ConsultDone --> ConsultOutcome{"Outcome"}
 
-    ConsultOutcome -->|"Tattoo ngay"| TattooNow["🎨 Tattoo Now<br/>Tạo Tattoo Appointment ngay sau"]
-    ConsultOutcome -->|"Lịch xăm sau"| ScheduleTattoo["📅 Đặt lịch xăm sau"]
-    ConsultOutcome -->|"Chưa chốt"| FollowUp["⏰ Follow-up Later"]
-    ConsultOutcome -->|"Không phù hợp"| ClosedEnd["❌ Close"]
+    ConsultOutcome -->|"Tattoo ngay"| TattooNow["Tattoo Now<br/>Tạo Tattoo Appointment ngay sau"]
+    ConsultOutcome -->|"Lịch xăm sau"| ScheduleTattoo["Đặt lịch xăm sau"]
+    ConsultOutcome -->|"Chưa chốt"| FollowUp["Follow-up Later"]
+    ConsultOutcome -->|"Không phù hợp"| ClosedEnd["Close"]
 
     Estimate --> CustomerConfirm["Khách xác nhận estimate"]
     ScheduleTattoo --> CustomerConfirm
